@@ -1,11 +1,13 @@
 import React from 'react'
 
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 function UserResults() {
+
+    const[users, setUsers] = useState([])
+    const[loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetchUsers()
-
     }, [])
 
     const fetchUsers = async () => {
@@ -15,10 +17,17 @@ function UserResults() {
             }
         })
         const data = await response.json()
-        console.log(data)
+
+       setUsers(data)
+       setLoading(false)
     }
+
   return (
-    <div>UserResults</div>
+    <div className='grid grid-cols-1 gap-8 xl:gril-cols-4 lg:grid-cols-3 md:grid-cols-2'>
+        {users.map((users) => (
+           <h3>{users.login}</h3> 
+        ))}
+    </div>
   )
 }
 
