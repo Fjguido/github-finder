@@ -1,12 +1,12 @@
 import React from 'react'
+import UserResults from '../components/Users/UserResults'
 
 function Home() {
   return (
-    <div>
-        <h1 className="text-6xl">Wassup</h1>
-        {process.env.TOKEN}
-       
-    </div>
+    <>
+    {/* search component here */}
+        <UserResults />
+    </>
   )
 }
 
