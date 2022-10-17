@@ -1,5 +1,5 @@
 import React from "react";
-import UserResults from "../components/Users/UserResults";
+import UserResults from "../components/users/UserResults";
 
 function Home() {
   return (
