@@ -1,17 +1,15 @@
 import React from "react";
 import Spinner from "../layout/Spinner";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import UserItem from "../users/UserItem";
 import GitHubContext from "../../context/github/GithubContext";
 
 function UserResults() {
-  const { users, loading, fetchUsers } = useContext(GitHubContext);
+  const { users, loading } = useContext(GitHubContext);
   // need to pass in values used in githubcontext
   // when you check console - the useState hook is now filled with the user objects
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+
 
   if (!loading) {
     return (
