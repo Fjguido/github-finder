@@ -10,50 +10,52 @@ export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
     loading: false,
-  }
+  };
 
-  const [state, dispatch] = useReducer(githubReducer, initialState)
+  const [state, dispatch] = useReducer(githubReducer, initialState);
 
   // dispatch is like "setState" but it is used to dispatch an action used from githubreducer file
 
   // Get search results
   const searchUsers = async (text) => {
-
-    setLoading()
+    setLoading();
 
     const params = new URLSearchParams({
       q: text,
-    })
+    });
 
     const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
       },
     });
-    const {items} = await response.json();
+    const { items } = await response.json();
 
     dispatch({
-        type: 'GET_USERS',
-        payload: items,
-    })
-    
+      type: "GET_USERS",
+      payload: items,
+    });
+
     // setUsers(data);
     // setLoading(false);
 
-     // delete setUsers and setLoading b/c we no longer use useState hook - instead we now use dispatch
+    // delete setUsers and setLoading b/c we no longer use useState hook - instead we now use dispatch
 
-     // we use data for payload b/c that is where we get our data from the api - payload is the convention word to use
+    // we use data for payload b/c that is where we get our data from the api - payload is the convention word to use
 
-     // changed payload to items because the info we want is in that array - check postman
+    // changed payload to items because the info we want is in that array - check postman
   };
 
-  const setLoading = () => dispatch({type: 'SET_LOADING'})
+  const setLoading = () => dispatch({ type: "SET_LOADING" });
 
   return (
-    <GitHubContext.Provider value={{ 
-        users: state.users, 
-        loading: state.loading, 
-        searchUsers }}>
+    <GitHubContext.Provider
+      value={{
+        users: state.users,
+        loading: state.loading,
+        searchUsers,
+      }}
+    >
       {children}
     </GitHubContext.Provider>
   );

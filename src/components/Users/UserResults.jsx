@@ -9,8 +9,6 @@ function UserResults() {
   // need to pass in values used in githubcontext
   // when you check console - the useState hook is now filled with the user objects
 
-
-
   if (!loading) {
     return (
       <div className="grid grid-cols-1 gap-8 xl:gril-cols-4 lg:grid-cols-3 md:grid-cols-2">
