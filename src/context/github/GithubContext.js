@@ -16,21 +16,25 @@ export const GithubProvider = ({ children }) => {
 
   // dispatch is like "setState" but it is used to dispatch an action used from githubreducer file
 
-  // get initial user (testing purposes)
-  const fetchUsers = async () => {
+  // Get search results
+  const searchUsers = async (text) => {
 
     setLoading()
 
-    const response = await fetch(`${GITHUB_URL}/users`, {
+    const params = new URLSearchParams({
+      q: text,
+    })
+
+    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
       },
     });
-    const data = await response.json();
+    const {items} = await response.json();
 
     dispatch({
         type: 'GET_USERS',
-        payload: data,
+        payload: items,
     })
     
     // setUsers(data);
@@ -39,6 +43,8 @@ export const GithubProvider = ({ children }) => {
      // delete setUsers and setLoading b/c we no longer use useState hook - instead we now use dispatch
 
      // we use data for payload b/c that is where we get our data from the api - payload is the convention word to use
+
+     // changed payload to items because the info we want is in that array - check postman
   };
 
   const setLoading = () => dispatch({type: 'SET_LOADING'})
@@ -47,7 +53,7 @@ export const GithubProvider = ({ children }) => {
     <GitHubContext.Provider value={{ 
         users: state.users, 
         loading: state.loading, 
-        fetchUsers }}>
+        searchUsers }}>
       {children}
     </GitHubContext.Provider>
   );

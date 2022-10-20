@@ -6,7 +6,7 @@ function UserSearch() {
 
     const [text, setText] = useState('')
 
-    const {users} = useContext(GitHubContext)
+    const {users, searchUsers} = useContext(GitHubContext)
 
     const handleChange = (e) => setText(e.target.value)
     // to check - go to console - components - usersearch - then youll see whatever is typed in
@@ -17,7 +17,7 @@ function UserSearch() {
         if(text === ''){
             alert('Please enter something')
         } else {
-            // @todo - search users
+            searchUsers(text)
             setText('')
         }
     }
