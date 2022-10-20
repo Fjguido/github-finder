@@ -47,9 +47,8 @@ export const GithubProvider = ({ children }) => {
   };
 
   // Clear users from state
-
-  const clearUsers = () => dispatch({ type: 'CLEAR_USERS'})
-
+  const clearUsers = () => dispatch({ type: "CLEAR_USERS" });
+  // show loading spinner
   const setLoading = () => dispatch({ type: "SET_LOADING" });
 
   return (
@@ -58,7 +57,7 @@ export const GithubProvider = ({ children }) => {
         users: state.users,
         loading: state.loading,
         searchUsers,
-        clearUsers
+        clearUsers,
       }}
     >
       {children}
