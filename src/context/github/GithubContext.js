@@ -46,6 +46,10 @@ export const GithubProvider = ({ children }) => {
     // changed payload to items because the info we want is in that array - check postman
   };
 
+  // Clear users from state
+
+  const clearUsers = () => dispatch({ type: 'CLEAR_USERS'})
+
   const setLoading = () => dispatch({ type: "SET_LOADING" });
 
   return (
@@ -54,6 +58,7 @@ export const GithubProvider = ({ children }) => {
         users: state.users,
         loading: state.loading,
         searchUsers,
+        clearUsers
       }}
     >
       {children}

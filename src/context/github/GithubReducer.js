@@ -11,6 +11,13 @@ const githubReducer = (state, action) => {
         ...state,
         loading: true,
       };
+    case "CLEAR_USERS":
+      return {
+        ...state,
+        users: []
+        
+      }
+      // put users to empty array in clear so when we clear it is empty
 
     default:
       return state;

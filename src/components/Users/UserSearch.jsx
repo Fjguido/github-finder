@@ -4,7 +4,7 @@ import GitHubContext from "../../context/github/GithubContext";
 function UserSearch() {
   const [text, setText] = useState("");
 
-  const { users, searchUsers } = useContext(GitHubContext);
+  const { users, searchUsers, clearUsers} = useContext(GitHubContext);
 
   const handleChange = (e) => setText(e.target.value);
   // to check - go to console - components - usersearch - then youll see whatever is typed in
@@ -45,7 +45,7 @@ function UserSearch() {
       </div>
       {users.length > 0 && (
         <div>
-          <button className="btn btn-ghost btn-lg">Clear</button>
+          <button onClick={clearUsers} className="btn btn-ghost btn-lg">Clear</button>
         </div>
       )}
     </div>
