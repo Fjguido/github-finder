@@ -1,45 +1,46 @@
-import { useState, useContext } from "react";
-import GitHubContext from "../../context/github/GithubContext";
-import AlertContext from "../../context/alert/AlertContext";
+import { useState, useContext } from 'react'
+import GithubContext from '../../context/github/GithubContext'
+import AlertContext from '../../context/alert/AlertContext'
+import { searchUsers } from '../../context/github/GithubActions'
 
 function UserSearch() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('')
 
-  const { users, searchUsers, clearUsers} = useContext(GitHubContext);
-  const {setAlert} = useContext(AlertContext)
+  const { users, dispatch } = useContext(GithubContext)
+  const { setAlert } = useContext(AlertContext)
 
-  const handleChange = (e) => setText(e.target.value);
-  // to check - go to console - components - usersearch - then youll see whatever is typed in
+  const handleChange = (e) => setText(e.target.value)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    if (text === "") {
-      setAlert("Please enter something", 'error');
+    if (text === '') {
+      setAlert('Please enter something', 'error')
     } else {
-      searchUsers(text);
-      setText("");
-    }
-  };
+      dispatch({ type: 'SET_LOADING' })
+      const users = await searchUsers(text)
+      dispatch({ type: 'GET_USERS', payload: users })
 
-  // added alert context so it can be used in the state - then added setAlert in the original alert 
+      setText('')
+    }
+  }
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8">
+    <div className='grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8'>
       <div>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <div className="relative">
+          <div className='form-control'>
+            <div className='relative'>
               <input
-                type="text"
-                className="w-full pr-40 bg-gray-200 input input-lg text-black"
-                placeholder="Search"
+                type='text'
+                className='w-full pr-40 bg-gray-200 input input-lg text-black'
+                placeholder='Search'
                 value={text}
                 onChange={handleChange}
               />
               <button
-                type="submit"
-                className="absolute top-0 right-0 rounded-l-none w-36 btn btn-lg"
+                type='submit'
+                className='absolute top-0 right-0 rounded-l-none w-36 btn btn-lg'
               >
                 Go
               </button>
@@ -49,12 +50,16 @@ function UserSearch() {
       </div>
       {users.length > 0 && (
         <div>
-          <button onClick={clearUsers} className="btn btn-ghost btn-lg">Clear</button>
+          <button
+            onClick={() => dispatch({ type: 'CLEAR_USERS' })}
+            className='btn btn-ghost btn-lg'
+          >
+            Clear
+          </button>
         </div>
       )}
     </div>
-  );
+  )
 }
-// line 47-51 made the clear button dissapear only if there is an inout larger then 0
 
-export default UserSearch;
+export default UserSearch
