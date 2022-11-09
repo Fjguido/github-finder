@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/github-finder/static/css/main.5ec18966.css",
+    "main.js": "/github-finder/static/js/main.bdcb444d.js",
+    "static/media/spinner.gif": "/github-finder/static/media/spinner.a1a996746e5e48352c81.gif",
+    "index.html": "/github-finder/index.html",
+    "main.5ec18966.css.map": "/github-finder/static/css/main.5ec18966.css.map",
+    "main.bdcb444d.js.map": "/github-finder/static/js/main.bdcb444d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5ec18966.css",
+    "static/js/main.bdcb444d.js"
+  ]
+}
